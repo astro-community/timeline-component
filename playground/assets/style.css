@@ -1,0 +1,52 @@
+:root[data-loading] {
+	visibility: hidden;
+}
+
+body {
+	margin: 2rem;
+
+	font: 100%/1.5 system-ui;
+}
+
+input[type="range" i] {
+	/* Layout */
+	height: 0.5em;
+	width: 10em;
+
+	/* Text */
+	font-size: 100%;
+
+	/* Appearance */
+	appearance: none;
+	background-color: CurrentColor;
+	border-radius: 1em;
+	color: hsl(0 0% 0% / 45%);
+
+	/* Custom */
+	--thumb-color: hsl(0 0% 25%);
+	--thumb-cursor: ew-resize;
+	--thumb-radius: 50%;
+	--thumb-size: 1.25em;
+}
+
+input[type="range" i]::-webkit-slider-thumb {
+	appearance: none;
+	height: var(--thumb-size);
+	width: var(--thumb-size);
+	background: var(--thumb-color);
+	border-radius: var(--thumb-radius);
+	cursor: var(--thumb-cursor);
+}
+
+input[type="range" i]::-moz-range-thumb {
+	/* Layout */
+	height: var(--thumb-size);
+	width: var(--thumb-size);
+
+	/* Appearance */
+	appearance: none;
+	background: var(--thumb-color);
+	border-style: none;
+	border-radius: var(--thumb-radius);
+	cursor: var(--thumb-cursor);
+}

@@ -1,0 +1,22 @@
+{
+	"editor.codeActionsOnSave": {
+		"source.fixAll": true
+	},
+	"editor.useTabStops": true,
+	"files.exclude": {
+		"**/.vscode": true,
+		"**/*.lock": true,
+		"**/node_modules": true,
+		"**/package-lock.json": true,
+	},
+	"javascript.preferences.importModuleSpecifierEnding": "js",
+	"javascript.preferences.quoteStyle": "single",
+	"javascript.updateImportsOnFileMove.enabled": "always",
+	"postcss.validate": false,
+	"prettier.ignorePath": "/.vscode/.prettierignore",
+	"prettier.useEditorConfig": true,
+	"typescript.enablePromptUseWorkspaceTsdk": true,
+	"typescript.preferences.importModuleSpecifier": "non-relative",
+	"typescript.preferences.importModuleSpecifierEnding": "js",
+	"typescript.updateImportsOnFileMove.enabled": "always"
+}

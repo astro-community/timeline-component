@@ -1,0 +1,30 @@
+{
+	"name": "@internal/element",
+	"type": "module",
+	"version": "0.1.0",
+	"private": true,
+	"main": "lib/Element.js",
+	"types": "lib/Element.d.ts",
+	"exports": {
+		".": {
+			"default": "./lib/Element.js",
+			"types": "./lib/Element.d.ts"
+		}
+	},
+	"source": {
+		"./Element.js": {
+			"type": "module"
+		}
+	},
+	"files": [
+		"lib"
+	],
+	"directories": {
+		"lib": "lib",
+		"src": "src"
+	},
+	"scripts": {
+		"build": "build",
+		"start": "vite"
+	}
+}

@@ -1,0 +1,25 @@
+{
+	"name": "@internal/build",
+	"type": "module",
+	"version": "0.1.0",
+	"private": true,
+	"main": "build.js",
+	"types": "build.d.ts",
+	"bin": {
+		"build" : "./build.bin.js"
+	},
+	"exports": {
+		".": {
+			"default": "./build.js",
+			"types": "./build.d.ts"
+		}
+	},
+	"files": [
+		"build.bin.js",
+		"build.js"
+	],
+	"scripts": {
+		"build": "",
+		"release": ""
+	}
+}

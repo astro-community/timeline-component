@@ -1,0 +1,25 @@
+html {
+	font: 100%/1.5 system-ui;
+
+	background-color: var(--color-background-base-default);
+	color: var(--color-text-primary);
+}
+
+a {
+	color: var(--color-text-interactive-default);
+}
+
+input[type="range" i] {
+	color: var(--color-text-interactive-default);
+	height: 2px;
+
+	--thumb-color: var(--color-background-base-default);
+}
+
+input[type="range" i]::-webkit-slider-thumb {
+	box-shadow: var(--color-text-interactive-default) 0 0 0 2px inset;
+}
+
+input[type="range" i]::-moz-range-thumb {
+	box-shadow: var(--color-text-interactive-default) 0 0 0 2px inset;
+}

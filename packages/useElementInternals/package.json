@@ -1,0 +1,31 @@
+{
+	"name": "@internal/useelementinternals",
+	"type": "module",
+	"version": "0.1.0",
+	"private": true,
+	"main": "lib/useElementInternals.js",
+	"types": "lib/useElementInternals.d.ts",
+	"exports": {
+		".": {
+			"default": "./lib/useElementInternals.js",
+			"types": "./lib/useElementInternals.d.ts"
+		}
+	},
+	"source": {
+		"./useElementInternals.ts": {
+			"type": "module"
+		}
+	},
+	"files": [
+		"lib"
+	],
+	"directories": {
+		"lib": "lib",
+		"src": "src"
+	},
+	"scripts": {
+		"build": "build",
+		"start": "vite",
+		"release": "npm release --dry-run"
+	}
+}

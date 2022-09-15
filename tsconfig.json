@@ -1,0 +1,21 @@
+{
+	"compilerOptions": {
+		"declaration": false,
+		"target": "ESNext",
+		"module": "ESNext",
+		"moduleResolution": "NodeNext",
+		"types": ["types-object", "vite/client"],
+		"esModuleInterop": true,
+		"exactOptionalPropertyTypes": true,
+		"forceConsistentCasingInFileNames": true,
+		"isolatedModules": true,
+		"noEmit": true,
+		"resolveJsonModule": true,
+		"strict": true,
+		"useDefineForClassFields": true,
+		"baseUrl": ".",
+		"paths": {
+			"packages:*": ["packages/*"]
+		}
+	}
+}

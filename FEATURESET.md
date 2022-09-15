@@ -1,0 +1,28 @@
+# Initial Feature Set
+
+- [x] Represents a 24 hour period
+- [x] Hours are demarcated
+- [x] Can add N tracks
+- [x] Timeline Events have configurable start times and end times
+- [x] Events can overlap on the same track
+- [x] when overlapping, events are clearly defined
+  - [ ] What about when events fully overlap?
+  - [ ] What about events that our outside the overall time span?
+- [x] can customize the time increment
+- [x] Timelines have configurable start times and end times
+- [x] Supports partial events.
+  - [x] Depicts partial events as extending beyond the edge.
+  - [ ] Includes representing partial events with the “dotted-line” effect
+- [x] Supports zoom control.
+  - [ ] Zoom control UI.
+- [x] Supports nested tracks.
+- [ ] Supports rolled up view of all the children on a parent track.
+- [ ] Supports parent tracks as a separate item from their children.
+- [x] Supports grouping tracks (associated parent/children tracks).
+- [ ] Supports expandable parent tracks UI.
+- [x] Supports event groups under a parent track.
+  - [ ] What is an “Event Group”? This interprets it as a set of events.
+- [x] Supports adding and removing children from parent tracks.
+- [x] Supports closing a parent track when its children do not exist.
+  - [ ] Depends on "expandable parent tracks UI"
+- [x] Supports multiple levels of tracks.

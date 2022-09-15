@@ -1,0 +1,453 @@
+:host {
+	/* Custom: Timeline (properties) */
+	--TimelineMsPerPx: 6e4;
+	--TimelineZoom: 1;
+	--TimelineOpening: 0;
+	--TimelineClosing: 0;
+	--TimelineCurrent: 0;
+
+	/* Custom: Timeline */
+	--TimelineBorder: hsl(0 0% 74%);
+	--TimelineCursor: hsl(0 0% 10%);
+	--TimelineGap: 0.0625em;
+	--TimelineGroup: hsl(0 0% 88%);
+	--TimelinePlayhead: var(--TimelineEventBorder);
+
+	/* Custom: Track */
+	--TimelineTrack: hsl(0 0% 90%);
+	--TimelineTrackChild: hsl(0 0% 84%);
+	--TimelineTrackHeaderSizeX: 12.25em;
+	--TimelineTrackPast: hsl(0 0% 84%);
+	--TimelineTrackSizeY: 2.75em;
+	--TimelineTrackText: hsl(0 0% 04%);
+
+	/* Custom: Ruler (properties) */
+	--TimelineRulerMsPerStep: 36e5;
+	--TimelineRulerSizeY: 20px;
+
+	/* Custom: Ruler Marker */
+	--TimelineRulerMarkerSizeY: 50%;
+	--TimelineRulerMarkerMinorSizeY: 25%;
+
+	/* Custom: Event */
+	--TimelineEvent: hsl(0 0% 98%);
+	--TimelineEventText: hsl(0 0% 04%);
+	--TimelineEventBorder: var(--TimelineBorder);
+
+	/* Computed */
+	--ComputedTimelineElapsed: calc(
+		var(--TimelineClosing, 0)
+		- var(--TimelineOpening, 0)
+	);
+	--ComputedTimelinePx: calc(
+		var(--TimelineZoom, 1)
+		/ var(--TimelineMsPerPx, 6e4)
+		* 1px
+	);
+}
+
+/* Default Styles */
+/* -------------------------------------------------------------------------- */
+
+* {
+	box-sizing: border-box;
+}
+
+button {
+	appearance: none;
+	background-color: transparent;
+	border-width: 0;
+	color: inherit;
+	font: inherit;
+	line-height: inherit;
+	margin: 0;
+	padding: 0;
+}
+
+svg {
+	fill: currentColor;
+}
+
+/* Workspace */
+/* -------------------------------------------------------------------------- */
+
+.workspace {
+	display: grid;
+
+	/* Layout */
+	align-items: start;
+	grid-template: 1fr / var(--TimelineTrackHeaderSizeX) 1fr;
+	grid-gap: var(--TimelineGap);
+	max-height: 100%;
+	max-width: max-content;
+
+	/* Appearance */
+	cursor: default;
+
+	/* Interface */
+	user-select: none;
+}
+
+/* Workspace Column */
+/* -------------------------------------------------------------------------- */
+
+.workspace-column {
+	display: grid;
+
+	/* Layout */
+	grid-template-rows: var(--TimelineRulerSizeY) minmax(var(--TimelineTrackSizeY), max-content);
+}
+
+.workspace-column > :nth-child(1) {
+	/* Ancestor Layout */
+	grid-area: 1 / 1 / 2 / 2;
+}
+
+.workspace-column > :nth-child(2) {
+	/* Ancestor Layout */
+	grid-area: 2 / 1 / 3 / 2;
+}
+
+.workspace-column > :nth-child(3) {
+	/* Ancestor Layout */
+	grid-area: 1 / 1 / 3 / 2;
+}
+
+/* Overflows */
+/* -------------------------------------------------------------------------- */
+
+.is-flow-x, .is-flow-y {
+	/* Interface */
+	scroll-behavior: smooth;
+	scrollbar-width: none;
+}
+
+.is-flow-x {
+	/* Layout */
+	overflow-x: auto;
+	overflow-y: hidden;
+}
+
+.is-flow-y {
+	/* Layout */
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+.is-flow-x::-webkit-scrollbar, .is-flow-y::-webkit-scrollbar {
+	/* Layout */
+	width: 0;
+	height: 0;
+}
+
+.track,
+.track-header {
+	display: grid;
+
+	/* Layout */
+	height: var(--TimelineTrackSizeY);
+}
+
+/* Track */
+/* -------------------------------------------------------------------------- */
+
+.track > * {
+	/* Ancestor Layout */
+	grid-area: 1 / 1 / 2 / 2;
+}
+
+.track-header {
+	display: flex;
+
+	/* Layout */
+	align-items: center;
+}
+
+.tracks:not(:empty),
+.track-fragment:not(:empty) {
+	display: grid;
+
+	/* Layout */
+	grid-gap: 1px;
+}
+
+.tracks:empty,
+.track-fragment:empty {
+	display: contents;
+}
+
+.tracks:not(:is(.open, .workspace-column) > *) {
+	display: none;
+}
+
+/* Toggle */
+/* -------------------------------------------------------------------------- */
+
+.toggle {
+	/* Ancestor Layout */
+	align-self: stretch;
+
+	display: flex;
+
+	/* Layout */
+	align-items: center;
+	margin-right: 0.25em;
+	overflow: hidden;
+	padding: 0.25em;
+
+	/* Appearance */
+	cursor: pointer;
+	outline-offset: -1px;
+}
+
+.toggle:hover {
+	/* Appearance */
+	background-color: hsl(0 0% 100% / 3%);
+}
+
+.toggle:focus-visible {
+	/* Appearance */
+	outline-style: solid;
+}
+
+.toggle:not(.has-children > * > *) {
+	/* Appearance */
+	visibility: hidden;
+}
+
+.toggle-symbol {
+	/* Layout */
+	width: 1em;
+}
+
+.toggle-symbol:where(.open > * > .toggle *) {
+	/* Transform */
+	rotate: 90deg;
+}
+
+/* Event */
+/* -------------------------------------------------------------------------- */
+
+.event {
+	display: grid;
+
+	/* Layout */
+	align-items: center;
+	padding: .5em;
+	width: calc(
+		var(--TimelineEventExpanseC, 0)
+		* var(--ComputedTimelinePx, 1px)
+	);
+
+	/* Text */
+	white-space: nowrap;
+
+	/* Appearance */
+	background: hsl(0 0% 98%);
+	border-radius: 0.1875em;
+	box-shadow: hsl(0 0% 24%) 0 0 0 1px inset;
+
+	/* Transform */
+	translate: calc(
+		var(--TimelineEventOpeningC, 0)
+		* var(--ComputedTimelinePx, 1px)
+	) 0px;
+
+	/* Variable */
+	--TimelineEventExpanseC: calc(var(--TimelineEventClosing, 0) - var(--TimelineEventOpening, 0));
+	--TimelineEventOpeningC: calc(var(--TimelineEventOpening, 0) - var(--TimelineOpening, 0));
+	--TimelineEventClosingC: calc(var(--TimelineEventClosing, 0) - var(--TimelineOpening, 0));
+}
+
+.event-title {
+	/* Layout */
+	overflow: hidden;
+
+	/* Text */
+	font-size: 0.875em;
+	line-height: calc(16 / 14);
+}
+
+.event-subtitle {
+	/* Layout */
+	overflow: hidden;
+
+	/* Text */
+	font-size: 0.75em;
+	line-height: calc(12 / 12);
+}
+
+/* Playhead */
+/* -------------------------------------------------------------------------- */
+
+.playhead {
+	display: grid;
+
+	/* Layout */
+	grid-template-rows: 0.75em 1fr;
+	margin-left: -0.375em;
+	width: 0.75em;
+
+	/* Appearance */
+	color: hsl(0 0% 0% / 45%);
+
+	/* Transform */
+	translate: calc(
+		(
+			var(--TimelineCurrent, 0)
+			- var(--TimelineOpening)
+		)
+		* var(--ComputedTimelinePx, 1px)
+	) 0px;
+}
+
+.playhead-handle {
+	/* Ancestor Layout */
+	grid-area: 1 / 1 / 2 / 3;
+
+	/* Layout */
+	margin-left: .5px;
+	width: 100%;
+}
+
+.playhead-line {
+	/* Ancestor Layout */
+	grid-area: 1 / 1 / 3 / 3;
+
+	/* Layout */
+	margin-left: 0.375em;
+	width: 1px;
+
+	/* Appearance */
+	background: linear-gradient(180deg, transparent calc(0.375em - .5px), CurrentColor calc(0.375em - .5px) );
+}
+
+/* Ruler / Track (shared) */
+/* -------------------------------------------------------------------------- */
+
+.has-tracks .ruler,
+.has-tracks .track {
+	/* Layout */
+	width: calc(
+		var(--ComputedTimelineElapsed, 0)
+		* var(--ComputedTimelinePx, 1px)
+	);
+}
+
+/* Workspace (shared) */
+/* -------------------------------------------------------------------------- */
+
+.workspace {
+	--depth: 0;
+	--box-shadow-1: 0 0 0 0 inset;
+	--box-shadow-2: 0 0 0 0 inset;
+	--darken: hsl(0 0% 0% / 0%);
+}
+
+/* Track (shared) */
+/* -------------------------------------------------------------------------- */
+
+.tracks .tracks {
+	--depth: calc(var(--depthC) + 1);
+}
+
+.tracks .track-fragment {
+	--depthC: var(--depth);
+}
+
+.track,
+.track-header {
+	/* Appearance */
+	box-shadow: var(--box-shadow-1), var(--box-shadow-2);
+}
+
+.tracks .tracks :is(.track, .track-header) {
+	--darken: hsl(0 0% 0% / calc(4% + 4% * var(--depth)));
+}
+
+.track-header {
+	/* Layout */
+	padding-left: calc(var(--depth) * .5em);
+
+	/* Appearance */
+	background:
+		linear-gradient(var(--darken), var(--darken)),
+		linear-gradient(var(--TimelineTrack), var(--TimelineTrack))
+	;
+}
+
+.track {
+	/* Appearance */
+	background:
+		linear-gradient(var(--darken), var(--darken)),
+		linear-gradient(90deg,
+			var(--TimelineTrackPast) calc(
+				(
+					var(--TimelineCurrent, 0)
+					- var(--TimelineOpening)
+				)
+				* var(--ComputedTimelinePx, 1px)
+			),
+			var(--TimelineTrack) calc(
+				(
+					var(--TimelineCurrent, 0)
+					- var(--TimelineOpening)
+				)
+				* var(--ComputedTimelinePx, 1px)
+			)
+		)
+	;
+}
+
+.has-children .track-fragment:nth-child(1) > :is(.track, .track-header) {
+	--box-shadow-1: var(--TimelineNestedTrackOpeningShadow);
+}
+
+.has-children .track-fragment:not(.has-children):nth-last-child(1) > :is(.track, .track-header) {
+	--box-shadow-2: var(--TimelineNestedTrackClosingShadow);
+}
+
+/* Ruler */
+/* -------------------------------------------------------------------------- */
+
+.ruler {
+	display: flex;
+
+	/* Layout */
+	overflow: hidden;
+	width: var(--ComputedWidth);
+
+	/* Apperance */
+	color: currentColor;
+
+	/* Computed */
+	--ComputedWidth: calc(
+		var(--ComputedTimelineElapsed, 0)
+		* var(--ComputedTimelinePx, 1px)
+	);
+}
+
+.ruler-step {
+	/* Layout */
+	flex-shrink: 0;
+	width: var(--ComputedWidth);
+
+	/* Text */
+	font-size: 0.75em;
+	line-height: calc(12 / 12);
+	text-indent: 12.5%;
+
+	/* Appearance */
+	background:
+		linear-gradient(90deg, var(--TimelineRulerMarkerColor, CurrentColor) 0 1px, transparent 0) no-repeat 0% 100% / 50% var(--TimelineRulerMarkerSizeY, 50%),
+		linear-gradient(90deg, var(--TimelineRulerMarkerColor, CurrentColor) 0 1px, transparent 0) no-repeat calc(100% / 3) 100% / 25% var(--TimelineRulerMarkerMinorSizeY, 25%),
+		linear-gradient(90deg, var(--TimelineRulerMarkerColor, CurrentColor) 0 1px, transparent 0) no-repeat calc(200% / 3) 100% / 25% var(--TimelineRulerMarkerMinorSizeY, 25%),
+		linear-gradient(90deg, var(--TimelineRulerMarkerColor, CurrentColor) 0 1px, transparent 0) no-repeat 100% 100% / 25% var(--TimelineRulerMarkerMinorSizeY, 25%)
+	;
+
+	/* Computed */
+	--ComputedWidth: calc(
+		var(--TimelineRulerMsPerStep, 36e5)
+		* var(--ComputedTimelinePx)
+	);
+}

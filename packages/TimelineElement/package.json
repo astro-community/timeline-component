@@ -1,0 +1,111 @@
+{
+	"name": "@astropub/timeline-component",
+	"description": "A sequence of tracks and events over a time span",
+	"type": "module",
+	"version": "0.1.0",
+	"main": "lib/registered.js",
+	"types": "lib/registered.d.ts",
+	"exports": {
+		".": {
+			"import": "./lib/module.js",
+			"types": "./lib/module.d.ts"
+		},
+		"./classic": {
+			"default": "./lib/classic.js",
+			"types": "./lib/classic.d.ts"
+		},
+		"./elements": {
+			"default": "./lib/elements.js",
+			"types": "./lib/elements.d.ts"
+		},
+		"./module": {
+			"default": "./lib/module.js",
+			"types": "./lib/module.d.ts"
+		},
+		"./astro": {
+			"import": "./lib/astro/module.js",
+			"types": "./lib/astro/module.d.ts"
+		},
+		"./astro/classic": {
+			"default": "./lib/astro/classic.js",
+			"types": "./lib/astro/classic.d.ts"
+		},
+		"./astro/elements": {
+			"default": "./lib/astro/elements.js",
+			"types": "./lib/astro/elements.d.ts"
+		},
+		"./astro/module": {
+			"default": "./lib/astro/module.js",
+			"types": "./lib/astro/module.d.ts"
+		}
+	},
+	"source": {
+		"./classic.ts": {
+			"type": "classic"
+		},
+		"./elements.ts": {
+			"type": "module"
+		},
+		"./module.ts": {
+			"type": "module"
+		},
+		"./astro/classic.ts": {
+			"type": "classic",
+			"lib": "lib/astro"
+		},
+		"./astro/elements.ts": {
+			"type": "module",
+			"lib": "lib/astro"
+		},
+		"./astro/module.ts": {
+			"type": "module",
+			"lib": "lib/astro"
+		}
+	},
+	"files": [
+		"lib"
+	],
+	"directories": {
+		"lib": "lib",
+		"src": "src"
+	},
+	"unpkg": "lib/classic.js",
+	"jsdelivr": "lib/classic.js",
+	"sideEffects": true,
+	"license": "CC0-1.0",
+	"author": "Jonathan Neal <jonathantneal@hotmail.com>",
+	"bugs": "https://github.com/astro-community/timeline-web-component/issues",
+	"homepage": "https://github.com/astro-community/timeline-web-component",
+	"repository": "https://github.com/astro-community/timeline-web-component.git",
+	"scripts": {
+		"build": "build",
+		"start": "vite",
+		"prerelease": "build",
+		"release": "npm publish --access public"
+	},
+	"keywords": [
+		"astro",
+		"chart",
+		"component",
+		"components",
+		"custom",
+		"element",
+		"elements",
+		"event",
+		"events",
+		"gantt",
+		"javascript",
+		"js",
+		"multitrack",
+		"region",
+		"regions",
+		"sequence",
+		"shadow",
+		"span",
+		"time",
+		"timeline",
+		"track",
+		"tracks",
+		"web"
+	]
+}

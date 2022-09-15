@@ -1,0 +1,44 @@
+:host {
+	--TimelineTrack: var(--color-background-surface-default);
+	--TimelineTrackPast: var(--color-palette-darkblue-700);
+	--TimelineEventBorder: var(--color-background-interactive-default);
+
+	--TimelineNestedTrackOpeningShadow: hsl(0 0% 0% / 50%) 0 .75rem .5rem -.75rem inset;
+	--TimelineNestedTrackClosingShadow: hsl(0 0% 0% / 50%) 0 -.75rem .5rem -.75rem inset;
+}
+
+.toggle {
+	color: var(--color-background-interactive-default);
+}
+
+.event {
+	/* Layout */
+	align-items: center;
+	padding: .5rem;
+
+	/* Appearance */
+	background-color: var(--color-background-base-default);
+	border-radius: 0.1875rem;
+	box-shadow: var(--TimelineEventBorder) 0 0 0 1px inset;
+}
+
+.playhead {
+	/* Appearance */
+	color: var(--TimelinePlayhead);
+}
+
+.event.status-critical {
+	--TimelineEventBorder: var(--color-status-critical);
+}
+
+.event.status-caution {
+	--TimelineEventBorder: var(--color-status-caution);
+}
+
+.event.status-serious {
+	--TimelineEventBorder: var(--color-status-serious);
+}
+
+.event.status-standby {
+	--TimelineEventBorder: var(--color-status-standby);
+}

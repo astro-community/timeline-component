@@ -1,0 +1,31 @@
+{
+	"name": "@internal/weakref",
+	"type": "module",
+	"version": "0.1.0",
+	"private": true,
+	"main": "lib/WeakRef.js",
+	"types": "lib/WeakRef.d.ts",
+	"exports": {
+		".": {
+			"default": "./lib/WeakRef.js",
+			"types": "./lib/WeakRef.d.ts"
+		}
+	},
+	"source": {
+		"./WeakRef.js": {
+			"type": "module"
+		}
+	},
+	"files": [
+		"lib"
+	],
+	"directories": {
+		"lib": "lib",
+		"src": "src"
+	},
+	"scripts": {
+		"build": "build",
+		"start": "vite",
+		"release": "npm release --dry-run"
+	}
+}
