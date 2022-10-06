@@ -1,4 +1,4 @@
-import { TimelineElement } from './elements.js'
+import { Timeline } from './Timeline.js'
 
 const name = new URL(
 	// @ts-ignore
@@ -6,5 +6,5 @@ const name = new URL(
 ).searchParams.get('as') || 'web-timeline'
 
 if (!customElements.get(name)) {
-	customElements.define(name, TimelineElement)
+	customElements.define(name, Timeline)
 }

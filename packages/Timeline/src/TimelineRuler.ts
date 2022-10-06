@@ -3,7 +3,7 @@ import { useElementInternals } from 'packages:useElementInternals/src/useElement
 
 import { format, steppers } from './shared.js'
 
-export class TimelineRulerElement extends Element.Div {
+export class TimelineRuler extends Element.Div {
 	constructor() {
 		super({ class: 'ruler', part: 'ruler' })
 
@@ -20,7 +20,7 @@ export class TimelineRulerElement extends Element.Div {
 	}
 
 	repaint() {
-		let host = this as any as TimelineRulerElement & { constructor: typeof TimelineRulerElement }
+		let host = this as any as TimelineRuler & { constructor: typeof TimelineRuler }
 		let base = (host.getRootNode() as ShadowRoot)?.host as HTMLElement
 
 		if (!base || host === base) return
@@ -41,7 +41,7 @@ export class TimelineRulerElement extends Element.Div {
 	}
 
 	redraw() {
-		let host = this as this & { constructor: typeof TimelineRulerElement }
+		let host = this as this & { constructor: typeof TimelineRuler }
 		let base = (host.getRootNode() as ShadowRoot)?.host as HTMLElement
 
 		if (!base || host === base) return

@@ -1,19 +1,19 @@
-import type { TimelineTrackOptions } from './TimelineTrackElement.js'
+import type { TimelineTrackOptions } from './TimelineTrack.js'
 
 import * as Element from 'packages:Element/src/Element.js'
 
-import { TimelineRulerElement } from './TimelineRulerElement.js'
-import { TimelineTrackElement } from './TimelineTrackElement.js'
+import { TimelineRuler } from './TimelineRuler.js'
+import { TimelineTrack } from './TimelineTrack.js'
 import { any, getTime, getZoom } from './shared.js'
 import { defineElementInternals, useElementInternals } from 'packages:useElementInternals/src/useElementInternals.js'
 
-export class TimelineElement extends HTMLElement {
+export class Timeline extends HTMLElement {
 	constructor(options = any as TimelineOptions) {
 		options = Object(options)
 
 		super()
 
-		let { parts, shadowRoot, shadowStyleElement } = useElementInternals<TimelineInternals, TimelineElement>(this, {
+		let { parts, shadowRoot, shadowStyleElement } = useElementInternals<TimelineInternals, Timeline>(this, {
 			props: {
 				startTime: 0,
 				endTime: 0,
@@ -33,6 +33,8 @@ export class TimelineElement extends HTMLElement {
 						this.setStyle({ '--TimelineClosing': newValue })
 
 						this.parts.ruler.redraw()
+
+						break
 					}
 
 					case 'currentTime': {
@@ -84,7 +86,7 @@ export class TimelineElement extends HTMLElement {
 				headerParts.tracks = new Element.from('div', { class: 'tracks', part: 'tracks' })
 			),
 			new Element.from('div', { class: 'workspace-column has-tracks is-flow-x' },
-				parts.ruler = new TimelineRulerElement(),
+				parts.ruler = new TimelineRuler(),
 				parts.tracks = new Element.from('div', { class: 'tracks', part: 'tracks' }),
 				parts.playhead = new Element.from('div', { class: 'playhead', part: 'playhead' },
 					new Element.fromSVG('svg', { class: 'playhead-handle', part: 'playhead-handle', viewBox: '0 0 2 1' },
@@ -95,7 +97,7 @@ export class TimelineElement extends HTMLElement {
 			)
 		)
 
-		shadowStyleElement.textContent = (this.constructor as typeof TimelineElement).cssText
+		shadowStyleElement.textContent = (this.constructor as typeof Timeline).cssText
 
 		shadowRoot.prepend(shadowStyleElement, parts.workspace)
 
@@ -107,7 +109,7 @@ export class TimelineElement extends HTMLElement {
 	connectedCallback() {
 		let { parts } = useElementInternals(this) as any as {
 			parts: {
-				ruler: TimelineRulerElement
+				ruler: TimelineRuler
 			}
 		}
 
@@ -115,7 +117,7 @@ export class TimelineElement extends HTMLElement {
 	}
 
 	addTrack(options = any as TimelineTrackOptions) {
-		let track = new TimelineTrackElement(options)
+		let track = new TimelineTrack(options)
 		let { parts } = useElementInternals(this)
 
 		useElementInternals(parts.header).parts.tracks.append(useElementInternals(track).parts.header)
@@ -125,7 +127,7 @@ export class TimelineElement extends HTMLElement {
 		return track
 	}
 
-	removeTrack(track: TimelineTrackElement) {
+	removeTrack(track: TimelineTrack) {
 		let { parts } = useElementInternals(this)
 
 		useElementInternals(parts.header).parts.tracks.removeChild(useElementInternals(track).parts.header)
@@ -141,10 +143,10 @@ export class TimelineElement extends HTMLElement {
 		}
 	}
 
-	get tracks(): NodeListOf<TimelineTrackElement> {
+	get tracks(): NodeListOf<TimelineTrack> {
 		let { parts } = useElementInternals(this)
 
-		return parts.tracks.childNodes as NodeListOf<TimelineTrackElement>
+		return parts.tracks.childNodes as NodeListOf<TimelineTrack>
 	}
 
 	set tracks(tracks: any) {
@@ -184,7 +186,7 @@ export class TimelineElement extends HTMLElement {
 	declare static cssText: string
 }
 
-defineElementInternals(TimelineElement, {
+defineElementInternals(Timeline, {
 	startTime: getTime,
 	endTime: getTime,
 	currentTime: getTime,
@@ -211,6 +213,6 @@ interface TimelineInternals {
 
 	parts: {
 		header: HTMLDivElement
-		ruler: TimelineRulerElement
+		ruler: TimelineRuler
 	}
 }

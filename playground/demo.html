@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<title>Timeline</title>
+		<link rel="stylesheet" href="/assets/style.css" />
+		<link rel="stylesheet" href="/assets/style-default.css" />
+		<script src="/assets/page.ts"></script>
+		<script src="/assets/script.ts" type="module"></script>
+	</head>
+	<body>
+		<web-timeline></web-timeline>
+
+		<input type="range" min="0.5" max="5" value="1" step="0.045" />
+
+		<p>
+			This is the default experience.
+		</p>
+		<p>
+			The timeline can be updated programatically. For example, to change the start time of an event:
+		</p>
+		<pre><code>timeline.tracks[1].events[0].startTime = '2022-01-01T00:30:00Z'</code></pre>
+		<p>
+			Or, to adjust the current level of zoom:
+		</p>
+		<pre><code>timeline.zoom = 1.5</code></pre>
+		<p>
+			Or, to move the playhead forward by 1 hour:
+		</p>
+		<pre><code>timeline.currentTime += 1000 * 60 * 60</code></pre>
+		<p>
+			Or, to move the start of the timeline back 1 hour:
+		</p>
+		<pre><code>timeline.startTime -= 1000 * 60 * 60</code></pre>
+
+		<ul>
+			<li>
+				<a href="/">Default Experience</a>
+			</li>
+			<li>
+				<a href="/astro.html">Astro Experience</a>
+			</li>
+		</ul>
+	</body>
+</html>

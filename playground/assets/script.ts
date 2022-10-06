@@ -1,9 +1,9 @@
-import { TimelineElement } from 'packages:TimelineElement/src/module.js'
+import { Timeline } from 'packages:Timeline/src/module.js'
 
-void TimelineElement
+void Timeline
 
 /** Timeline element */
-const timeline = globalThis.timeline = document.querySelector('web-timeline') as TimelineElement
+const timeline = globalThis.timeline = document.querySelector('web-timeline') as Timeline
 
 // Update timeline element start, end, and current times
 Object.assign(timeline, {
@@ -74,5 +74,5 @@ range.addEventListener('input', () => {
 
 // TypeScript declaration to support `globalThis.timeline`
 declare global {
-	var timeline: TimelineElement
+	var timeline: Timeline
 }

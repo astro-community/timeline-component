@@ -1,6 +1,6 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom/client'
-import { Timeline, TimelineProps, TimelineTrack, TimelineTrackHeader } from 'packages:ReactTimeline/src/Timeline.js'
+import { Timeline, TimelineTrack, TimelineTrackHeader } from 'packages:ReactTimeline/src/Timeline.js'
 
 const root = ReactDOM.createRoot(document.getElementById('root')!)
 

@@ -2,7 +2,7 @@ import { defineElementInternals, useElementInternals } from 'packages:useElement
 import * as Element from 'packages:Element/src/Element.js'
 import { any, getStatus, getString, getTime, getTimeISO } from './shared.js'
 
-export class TimelineEventElement extends Element.Div {
+export class TimelineEvent extends Element.Div {
 	constructor(options = any as TimelineEventOptions) {
 		options = Object(options)
 
@@ -11,16 +11,20 @@ export class TimelineEventElement extends Element.Div {
 		let content = new DocumentFragment()
 		let observe = new MutationObserver(() => {
 			observe.disconnect()
+
 			ints.parts.content.replaceChildren(content)
+
 			observe.observe(content, { childList: true })
 		})
+
 		observe.observe(content, { childList: true })
 
-		let ints = useElementInternals<TimelineEventInternals, TimelineEventElement>(this, {
+		let ints = useElementInternals<TimelineEventInternals, TimelineEvent>(this, {
 			props: {
 				startTime: 0,
 				endTime: 0,
 				status: 'normal',
+
 				get content() {
 					return content
 				},
@@ -47,33 +51,6 @@ export class TimelineEventElement extends Element.Div {
 						this.host.classList.toggle('status-' + newValue, true)
 						this.host.part.toggle('status-' + oldValue, false)
 						this.host.part.toggle('status-' + newValue, true)
-
-						break
-					}
-
-					// case 'title': {
-					// 	ints.parts.title.replaceChildren(newValue)
-
-					// 	break
-					// }
-
-					// case 'subtitle': {
-					// 	ints.parts.subtitle.replaceChildren(newValue)
-
-					// 	break
-					// }
-				}
-
-				switch (name) {
-					case 'startTime':
-					case 'endTime': {
-						// if (!options.subtitle) {
-						// 	this.host.subtitle = `${
-						// 		getTimeISO(ints.props.startTime, '{hh}:{mm}:{ss}')
-						// 	} - ${
-						// 		getTimeISO(ints.props.endTime, '{hh}:{mm}:{ss}')
-						// 	}`
-						// }
 
 						break
 					}
@@ -109,10 +86,10 @@ export class TimelineEventElement extends Element.Div {
 	set endTime(endTime: number | string | Date)
 
 	// @ts-expect-error
-	get status(): string
+	get status(): TimelineEventStatus
 
 	// @ts-expect-error
-	set status(status: string)
+	set status(status: TimelineEventStatus)
 
 	// @ts-expect-error
 	get content(): DocumentFragment
@@ -121,7 +98,7 @@ export class TimelineEventElement extends Element.Div {
 	set content(status: Node | string)
 }
 
-defineElementInternals(TimelineEventElement, {
+defineElementInternals(TimelineEvent, {
 	startTime: getTime,
 	endTime: getTime,
 	status: getString,
@@ -133,9 +110,11 @@ defineElementInternals(TimelineEventElement, {
 export interface TimelineEventOptions {
 	startTime?: number | string | Date
 	endTime?: number | string | Date
-	status?: string
+	status?: TimelineEventStatus | (string & Record<never, never>)
 	content?: Node | string
 }
+
+export type TimelineEventStatus = 'caution' | 'critical' | 'serious' | 'standby' | (string & Record<never, never>)
 
 interface TimelineEventInternals {
 	parts: {
@@ -147,6 +126,6 @@ interface TimelineEventInternals {
 		startTime: number
 		endTime: number
 
-		status: string
+		status: TimelineEventStatus
 	}
 }

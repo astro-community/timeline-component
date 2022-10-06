@@ -1,9 +1,9 @@
-export declare class TimelineElement extends HTMLElement {
+export declare class Timeline extends HTMLElement {
 	constructor(options?: TimelineOptions)
 
-	addTrack(options?: TimelineTrackOptions): TimelineTrackElement
+	addTrack(options?: TimelineTrackOptions): TimelineTrack
 
-	get tracks(): NodeListOf<TimelineTrackElement>
+	get tracks(): NodeListOf<TimelineTrack>
 
 	get startTime(): number
 	set startTime(startTime: number | string | Date)
@@ -25,7 +25,7 @@ export interface TimelineOptions {
 	zoom?: number | string | Date
 }
 
-export declare class TimelineTrackElement extends HTMLElement {
+export declare class TimelineTrack extends HTMLElement {
 	constructor(options?: TimelineTrackOptions)
 
 	get events(): NodeList
@@ -37,8 +37,8 @@ export declare class TimelineTrackElement extends HTMLElement {
 	get open(): boolean
 	set open(open: boolean)
 
-	addEvent(options?: TimelineEventOptions): TimelineEventElement
-	addTrack(options?: TimelineTrackOptions): TimelineTrackElement
+	addEvent(options?: TimelineEventOptions): TimelineEvent
+	addTrack(options?: TimelineTrackOptions): TimelineTrack
 }
 
 export interface TimelineTrackOptions {
@@ -46,7 +46,7 @@ export interface TimelineTrackOptions {
 	open?: boolean
 }
 
-export declare class TimelineEventElement extends HTMLElement {
+export declare class TimelineEvent extends HTMLElement {
 	constructor(options?: TimelineEventOptions)
 
 	get startTime(): number

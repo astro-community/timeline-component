@@ -1,26 +1,24 @@
 import React from 'react'
-import { Provider, useState } from './state.js'
-import { TimelineElement } from 'packages:TimelineElement/src/TimelineElement.js'
+import { Timeline } from 'packages:Timeline/src/Timeline.js'
 import { createContextState } from 'packages:ReactTimeline/src/createContextState.js'
-import { any } from 'packages:TimelineElement/src/shared.js'
-export { TimelineElement }
-export { TimelineTrackElement } from 'packages:TimelineElement/src/TimelineTrackElement'
-export { TimelineEventElement } from 'packages:TimelineElement/src/TimelineEventElement'
+export { Timeline }
+export { TimelineTrack } from 'packages:Timeline/src/TimelineTrack.js'
+export { TimelineEvent } from 'packages:Timeline/src/TimelineEvent.js'
 
 /** Name of the Custom Element. */
 let name = 'web-timeline'
 
 if (!customElements.get(name)) {
-	customElements.define(name, TimelineElement)
+	customElements.define(name, Timeline)
 }
 
-export function Timeline(props: React.PropsWithChildren<TimelineProps>) {
+export function ReactTimeline(props: React.PropsWithChildren<TimelineProps>) {
 	return React.createElement(TimelineProvider, {}, React.createElement(TimelineContent, props))
 }
 
 function TimelineContent(props: React.PropsWithChildren<TimelineProps>) {
 	let [ state, setState ] = useTimelineState()
-	let ref = useCallbackRef((node: TimelineElement) => {
+	let ref = useCallbackRef((node: Timeline) => {
 		if (node) {
 			let tracks = [ ...state.tracks ].map(
 				(track) => {
@@ -47,7 +45,7 @@ function TimelineContent(props: React.PropsWithChildren<TimelineProps>) {
 }
 
 /** React Component returning the Custom Element. */
-export let TimelineComponent = createComponent<TimelineElement, TimelineProps>('web-timeline', {
+export let TimelineComponent = createComponent<Timeline, TimelineProps>('web-timeline', {
 	tracks: 1,
 	startTime: 1,
 	endTime: 1,
@@ -70,13 +68,13 @@ const [ useTimelineState, TimelineProvider ] = createContextState({
 
 // -----------------------------------------------------------------------------
 
-export function TimelineTrack(props: React.PropsWithChildren<TimelineTrackProps>) {
+export function ReactTimelineTrack(props: React.PropsWithChildren<TimelineTrackProps>) {
 	return React.createElement(TimelineTrackProvider, {},
 		React.createElement(TimelineTrackContent, props)
 	)
 }
 
-function TimelineTrackContent(props: React.PropsWithChildren<TimelineTrackProps>) {
+function ReactTimelineTrackContent(props: React.PropsWithChildren<TimelineTrackProps>) {
 	const [ timelineState, setTimelineState ] = useTimelineState()
 	const [ timelineTrackState, setTimelineTrackState ] = useTimelineTrackState()
 	const ref = useCallbackRef((node: HTMLElement) => {

@@ -1,17 +1,17 @@
 import * as Element from 'packages:Element/src/Element.js'
 import { defineElementInternals, useElementInternals } from 'packages:useElementInternals/src/useElementInternals.js'
 
-import { TimelineTrackHeaderElement } from './TimelineTrackHeaderElement.js'
-import { TimelineEventElement, TimelineEventOptions } from './TimelineEventElement.js'
+import { TimelineTrackHeaderElement } from './TimelineTrackHeader.js'
+import { TimelineEvent, TimelineEventOptions } from './TimelineEvent.js'
 import { any } from './shared.js'
 
-export class TimelineTrackElement extends Element.Div {
+export class TimelineTrack extends Element.Div {
 	constructor(options = any as TimelineTrackOptions) {
 		options = Object(options)
 
 		super()
 
-		let { props, parts, setProps } = useElementInternals<TimelineTrackInternals, TimelineTrackElement>(this, {
+		let { props, parts, setProps } = useElementInternals<TimelineTrackInternals, TimelineTrack>(this, {
 			props: {
 				header: new DocumentFragment(),
 				open: true,
@@ -60,12 +60,12 @@ export class TimelineTrackElement extends Element.Div {
 		return useElementInternals<TimelineTrackInternals>(this).parts.tracks.childNodes
 	}
 
-	addEvent(options = any as TimelineEventOptions): TimelineEventElement {
-		return useElementInternals<TimelineTrackInternals>(this).parts.content.appendChild(new TimelineEventElement(options))
+	addEvent(options = any as TimelineEventOptions): TimelineEvent {
+		return useElementInternals<TimelineTrackInternals>(this).parts.content.appendChild(new TimelineEvent(options))
 	}
 
-	addTrack(options = any): TimelineTrackElement {
-		let track = new TimelineTrackElement(options)
+	addTrack(options = any): TimelineTrack {
+		let track = new TimelineTrack(options)
 		let { parts } = useElementInternals<TimelineTrackInternals>(this)
 
 		this.classList.add('has-children')
@@ -91,10 +91,10 @@ export class TimelineTrackElement extends Element.Div {
 	get header(): DocumentFragment
 
 	// @ts-expect-error
-	set header(status: Node | string)
+	set header(header: Node | string)
 }
 
-defineElementInternals(TimelineTrackElement, {
+defineElementInternals(TimelineTrack, {
 	open: Boolean,
 	header(value: any) {
 		return value

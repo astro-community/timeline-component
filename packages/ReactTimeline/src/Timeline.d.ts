@@ -5,7 +5,7 @@ export declare let Timeline: ForwardRefExoticComponent<
 	TimelineProps & RefAttributes<TimelineRef>
 >
 
-export type TimelineRef = TimelineElement | undefined
+export type TimelineRef = Timeline | undefined
 
 export interface TimelineProps {
 	startTime: number | string | Date
@@ -27,11 +27,11 @@ export interface TimelineTrackProps {
 
 // -----------------------------------------------------------------------------
 
-export declare class TimelineElement extends HTMLElement {
+export declare class Timeline extends HTMLElement {
 	constructor(options?: TimelineOptions)
 	connectedCallback(): void
-	addTrack(options?: TimelineTrackOptions): TimelineTrackElement
-	get tracks(): NodeListOf<TimelineTrackElement>
+	addTrack(options?: TimelineTrackOptions): TimelineTrack
+	get tracks(): NodeListOf<TimelineTrack>
 	get startTime(): number
 	set startTime(startTime: number | string | Date)
 	get endTime(): number
@@ -48,7 +48,7 @@ export interface TimelineOptions {
 	currentTime: number
 }
 
-export declare class TimelineTrackElement extends HTMLElement {
+export declare class TimelineTrack extends HTMLElement {
 	constructor(options?: TimelineTrackOptions)
 	get events(): NodeList
 	get tracks(): NodeList
@@ -56,8 +56,8 @@ export declare class TimelineTrackElement extends HTMLElement {
 	set content(content: Node | string)
 	get open(): boolean
 	set open(open: any)
-	addEvent(options?: TimelineEventOptions): TimelineEventElement
-	addTrack(options?: any): TimelineTrackElement
+	addEvent(options?: TimelineEventOptions): TimelineEvent
+	addTrack(options?: any): TimelineTrack
 }
 
 export interface TimelineTrackOptions {
@@ -65,7 +65,7 @@ export interface TimelineTrackOptions {
 	open?: boolean
 }
 
-export declare class TimelineEventElement extends HTMLElement {
+export declare class TimelineEvent extends HTMLElement {
 	constructor(options?: TimelineEventOptions)
 	get startTime(): number
 	set startTime(startTime: number | string | Date)
