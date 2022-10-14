@@ -1,7 +1,7 @@
 {
 	"name": "timeline-web-component-root",
 	"type": "module",
-	"version": "0.2.0",
+	"version": "0.2.1",
 	"private": true,
 	"workspaces": [
 		"packages/*",
@@ -9,6 +9,7 @@
 	],
 	"scripts": {
 		"build": "npm run build --workspaces",
+		"release": "npm run release --workspace='@astropub/timeline-component'",
 		"start": "cd playground; npm start"
 	},
 	"stackblitz": {
