@@ -125,16 +125,19 @@ The Timeline component offers public methods that can be executed.
 These methods are can be executed by setting a [`ViewChild` decorator](https://angular.io/api/core/ViewChild) on the element.
 
 ```js
-import { Timeline } from '@astropub/timeline-component'
-import { Component, ViewChild } from '@angular/core'
+import { Timeline } from '@astropub/timeline-component/lib/elements.js'
+import { Component, ElementRef, ViewChild, Input, OnChanges } from '@angular/core'
+
+if (!customElements.get('web-timeline')) {
+  customElements.define('web-timeline', Timeline)
+}
 
 @Component({
-  selector: 'web-timeline',
-  template: `<web-timeline></web-timeline>`
+  selector: 'app-timeline',
+  template: `<web-timeline #timeline></web-timeline>`,
 })
-
-export class TimelineComponent {
-  @ViewChild(Timeline) timelineComponent: Timeline
+export class TimelineComponent implements OnChanges {
+  @ViewChild('timeline') timelineComponent: ElementRef
 }
 ```
 
