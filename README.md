@@ -5,6 +5,7 @@ The **Timeline Component** lets you represent a sequence of tracks and events ov
 ![Screenshot](/playground/assets/screenshot.png)
 
 [![Open in StackBlitz][stackblitz-img]][stackblitz-url]
+[![Open in Codeanywhere][codeanywhere-img]][codeanywhere-url]
 
 ```html
 <web-timeline></web-timeline>
@@ -418,3 +419,6 @@ event.content = template.content
 
 [stackblitz-img]: https://img.shields.io/badge/-Open%20in%20Stackblitz-%231374EF?color=%23444&labelColor=%231374EF&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjEwIDggMTIgMTgiIGhlaWdodD0iMTgiIGZpbGw9IiNGRkYiPjxwYXRoIGQ9Ik0xMCAxNy42aDUuMmwtMyA3LjRMMjIgMTQuNGgtNS4ybDMtNy40TDEwIDE3LjZaIi8+PC9zdmc+&style=for-the-badge
 [stackblitz-url]: https://stackblitz.com/github/jonathantneal/timeline-web-component?file=README.md&initialpath=/themed/
+
+[codeanywhere-img]: https://codeanywhere.com/img/open-in-codeanywhere-btn.svg
+[codeanywhere-url]: https://app.codeanywhere.com/#https://github.com/jonathantneal/timeline-web-component
