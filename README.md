@@ -4,7 +4,17 @@ The **Timeline Component** lets you represent a sequence of tracks and events ov
 
 ![Screenshot](/playground/assets/screenshot.png)
 
+## 🌏  Open in the Cloud 
+
+Click any of the buttons below to start a new development environment to demo or contribute to the codebase without having to install anything on your machine:
 [![Open in StackBlitz][stackblitz-img]][stackblitz-url]
+[![Open in VS Code](https://img.shields.io/badge/Open%20in-VS%20Code-blue?logo=visualstudiocode)](https://vscode.dev/github/jonathantneal/timeline-web-component)
+[![Open in Glitch](https://img.shields.io/badge/Open%20in-Glitch-blue?logo=glitch)](https://glitch.com/edit/#!/import/github/jonathantneal/timeline-web-component)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/jonathantneal/timeline-web-component)
+[![Edit in Codesandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/jonathantneal/timeline-web-component)
+[![Open in Repl.it](https://replit.com/badge/github/withastro/astro)](https://replit.com/github/jonathantneal/timeline-web-component)
+[![Open in Codeanywhere](https://codeanywhere.com/img/open-in-codeanywhere-btn.svg)](https://app.codeanywhere.com/#https://github.com/jonathantneal/timeline-web-component)
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/jonathantneal/timeline-web-component)
 
 ```html
 <web-timeline></web-timeline>
@@ -418,3 +428,5 @@ event.content = template.content
 
 [stackblitz-img]: https://img.shields.io/badge/-Open%20in%20Stackblitz-%231374EF?color=%23444&labelColor=%231374EF&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjEwIDggMTIgMTgiIGhlaWdodD0iMTgiIGZpbGw9IiNGRkYiPjxwYXRoIGQ9Ik0xMCAxNy42aDUuMmwtMyA3LjRMMjIgMTQuNGgtNS4ybDMtNy40TDEwIDE3LjZaIi8+PC9zdmc+&style=for-the-badge
 [stackblitz-url]: https://stackblitz.com/github/jonathantneal/timeline-web-component?file=README.md&initialpath=/themed/
+
+
